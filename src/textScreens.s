@@ -235,33 +235,33 @@ TEXT_INSTRUCTIONS_4:
 	.byte 0
 
 TEXT_INSTRUCTIONS_4_0:
-	textString 5 + 5, 23, 0, "FLING"
-	textString 5 + 7, 1, 0, "GREEN FICKLE TO THE LEFT."
-	textString 5 + 11, 27, 0, "FLING"
-	textString 5 + 13, 1, 0, "GREEN FICKLE TO THE RIGHT."
-	.byte 0
-
-TEXT_INSTRUCTIONS_4_0_ALT0:
 	textString 5 + 5, 23, 0, "TWIST"
 	textString 5 + 7, 1, 0, "GREEN FICKLE TO THE RIGHT."
 	textString 5 + 11, 27, 0, "TWIST"
 	textString 5 + 13, 1, 0, "GREEN FICKLE TO THE LEFT."
 	.byte 0
 
-TEXT_INSTRUCTIONS_4_0_ALT1:
-	textString 5 + 5, 23, 0, "FLING"
-	textString 5 + 7, 1, 0, "BLUE FICKLE TO THE LEFT."
-	textString 5 + 11, 27, 0, "FLING"
-	textString 5 + 13, 1, 0, "BLUE FICKLE TO THE RIGHT."
-	.byte 0
-
-TEXT_INSTRUCTIONS_4_0_ALT2:
+TEXT_INSTRUCTIONS_4_0_ALT0:
 	textString 5 + 5, 23, 0, "TWIST"
 	textString 5 + 7, 1, 0, "BLUE FICKLE TO THE RIGHT."
 	textString 5 + 11, 27, 0, "TWIST"
 	textString 5 + 13, 1, 0, "BLUE FICKLE TO THE LEFT."
 	.byte 0
 
+
+TEXT_INSTRUCTIONS_4_0_ALT1:
+	textString 5 + 5, 23, 0, "FLING"
+	textString 5 + 7, 1, 0, "GREEN FICKLE TO THE LEFT."
+	textString 5 + 11, 27, 0, "FLING"
+	textString 5 + 13, 1, 0, "GREEN FICKLE TO THE RIGHT."
+	.byte 0
+
+TEXT_INSTRUCTIONS_4_0_ALT2:
+	textString 5 + 5, 23, 0, "FLING"
+	textString 5 + 7, 1, 0, "BLUE FICKLE TO THE LEFT."
+	textString 5 + 11, 27, 0, "FLING"
+	textString 5 + 13, 1, 0, "BLUE FICKLE TO THE RIGHT."
+	.byte 0
 
 TEXT_INSTRUCTIONS_5:
 	textString 1, 1, 0, "INSTRUCTIONS (hhhhho)"
@@ -606,11 +606,11 @@ initInstructionsAgain:
 
 		LDA var::text_current_option
 		ASL
+		ORA var::text_settings_rotors
+		ASL
 		ORA var::text_settings_colours
 		ASL
-		ORA var::text_settings_rotors
-		EOR #1
-		ASL
+
 		TAX
 
 		LDA TEXT_INSTRUCTIONS_ALT, X

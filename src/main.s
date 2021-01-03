@@ -152,6 +152,7 @@ initialization:
 		STA var::text_settings_music
 		STA var::text_settings_speed
 		STA var::text_settings_colours
+		STA var::text_settings_rotors
 
 		JSR setNormalColourScheme
 		JSR setSpeed
