@@ -1,8 +1,6 @@
 # Fickle-C64
 A one-button real-time puzzle game for the Commodore 64
 
-Fickle: a one-button real-time puzzle game for the Commodore 64
-
 (C)2014 Malcolm Tyrrell
 
 Thank you for playing Fickle. The original game was released in 2011 for the
