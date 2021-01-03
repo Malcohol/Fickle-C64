@@ -1,0 +1,587 @@
+.macro textCharBlock sourceChar, numChars
+	.word CHAR_ROM_ADDRESS + (sourceChar * 8)
+	.byte numChars * 8
+.endmacro
+
+LUT_TEXT_CHARBLOCKS:
+	textCharBlock 1, 26 ; A-Z
+	textCharBlock 32, 2 ; space, !
+	textCharBlock 39, 3 ; '()
+	textCharBlock 44, 7 ; ,-./012
+	textCharBlock 52, 3 ; 456
+	textCharBlock 58, 1 ; :
+	textCharBlock 83, 1 ; Heart
+	.byte 0, 0
+
+
+TEXT_EXTRA_CHAR_SOURCE:
+
+TEXT_HOLLOW_HEART:
+	.byte %00110110
+	.byte %01001001
+	.byte %01000001
+	.byte %01000001
+	.byte %00100010
+	.byte %00010100
+	.byte %00001000
+	.byte %00000000
+
+TEXT_COPYRIGHT_L_SOURCE:
+	.byte %00000000
+	.byte %00000001
+	.byte %00000011
+	.byte %00000011
+	.byte %00000011
+	.byte %00000001
+	.byte %00000000
+	.byte %00000000
+
+TEXT_COPYRIGHT_R_SOURCE:
+	.byte %11111000
+	.byte %10001100
+	.byte %00110110
+	.byte %01000110
+	.byte %00110110
+	.byte %10001100
+	.byte %11111000
+	.byte %00000000
+
+TEXT_ROTOR_TL:
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000111
+
+TEXT_ROTOR_TR:
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %11100000
+
+TEXT_ROTOR_BL:
+	.byte %00000111
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+
+TEXT_ROTOR_BR:
+	.byte %11100000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+
+TEXT_EXTRA_CHAR_SOURCE_END:
+
+TEXT_EXTRA_CHAR_SOURCE_0:
+
+TEXT_HILIGHT_TL:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111110
+	.byte %11111110
+	.byte %11110000
+	.byte %11100000
+
+TEXT_HILIGHT_T:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %00001111
+	.byte %00000110
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+
+TEXT_HILIGHT_TR:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %00011111
+	.byte %00001111
+	.byte %00000111
+	.byte %00000111
+
+TEXT_HILIGHT_L:
+	.byte %11000000
+	.byte %11000000
+	.byte %11000000
+	.byte %11100000
+	.byte %11110000
+	.byte %11111000
+	.byte %11110000
+	.byte %11100000
+
+TEXT_HILIGHT_R:
+	.byte %00001111
+	.byte %00011111
+	.byte %00001111
+	.byte %00000111
+	.byte %00000011
+	.byte %00000011
+	.byte %00000011
+	.byte %00000111
+
+TEXT_HILIGHT_BL:
+	.byte %11100000
+	.byte %11110000
+	.byte %11111000
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+TEXT_HILIGHT_B:
+	.byte %00000000
+	.byte %00000000
+	.byte %01100000
+	.byte %11110000
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+TEXT_HILIGHT_BR:
+	.byte %00001111
+	.byte %01111111
+	.byte %01111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+TEXT_ROTOR_CLOCKWISE_L:
+	.byte %00011111
+	.byte %00111111
+	.byte %01111111
+	.byte %01111111
+	.byte %01000000
+	.byte %01000000
+	.byte %00100000
+	.byte %00011000
+
+TEXT_ROTOR_CLOCKWISE_R:
+	.byte %00011000
+	.byte %00000100
+	.byte %00000010
+	.byte %00000010
+	.byte %11111110
+	.byte %11111110
+	.byte %11111100
+	.byte %11111000
+
+TEXT_ROTOR_ANTICLOCKWISE_L:
+	.byte %00011000
+	.byte %00100000
+	.byte %01000000
+	.byte %01000000
+	.byte %01111111
+	.byte %01111111
+	.byte %00111111
+	.byte %00011111
+
+TEXT_ROTOR_ANTICLOCKWISE_R:
+	.byte %11111000
+	.byte %11111100
+	.byte %11111110
+	.byte %11111110
+	.byte %00000010
+	.byte %00000010
+	.byte %00000100
+	.byte %00011000
+
+TEXT_EXTRA_CHAR_SOURCE_0_END:
+
+TEXT_EXTRA_CHAR_SOURCE_1:
+
+;TEXT_HILIGHT_TL:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111110
+	.byte %11111100
+	.byte %11111000
+
+;TEXT_HILIGHT_T:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %00001111
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+
+;TEXT_HILIGHT_TR:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %00111111
+	.byte %00011111
+
+;TEXT_HILIGHT_L:
+	.byte %11110000
+	.byte %11110000
+	.byte %11110000
+	.byte %11110000
+	.byte %11111000
+	.byte %11111000
+	.byte %11111000
+	.byte %11111000
+
+;TEXT_HILIGHT_R:
+	.byte %00011111
+	.byte %00011111
+	.byte %00011111
+	.byte %00001111
+	.byte %00001111
+	.byte %00001111
+	.byte %00001111
+	.byte %00011111
+
+;TEXT_HILIGHT_BL:
+	.byte %11111100
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+
+;TEXT_HILIGHT_B:
+	.byte %00000000
+	.byte %00000000
+	.byte %11110000
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+;TEXT_HILIGHT_BR:
+	.byte %00111111
+	.byte %01111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+;TEXT_ROTOR_CLOCKWISE_L:
+	.byte %00011111
+	.byte %00100111
+	.byte %01000011
+	.byte %01000001
+	.byte %01000001
+	.byte %01000011
+	.byte %00100111
+	.byte %00011111
+
+;TEXT_ROTOR_CLOCKWISE_R:
+	.byte %11111000
+	.byte %11100100
+	.byte %11000010
+	.byte %10000010
+	.byte %10000010
+	.byte %11000010
+	.byte %11100100
+	.byte %11111000
+
+;TEXT_ROTOR_ANTICLOCKWISE_L:
+	.byte %00011111
+	.byte %00100111
+	.byte %01000011
+	.byte %01000001
+	.byte %01000001
+	.byte %01000011
+	.byte %00100111
+	.byte %00011111
+
+;TEXT_ROTOR_ANTICLOCKWISE_R:
+	.byte %11111000
+	.byte %11100100
+	.byte %11000010
+	.byte %10000010
+	.byte %10000010
+	.byte %11000010
+	.byte %11100100
+	.byte %11111000
+
+TEXT_EXTRA_CHAR_SOURCE_1_END:
+
+TEXT_EXTRA_CHAR_SOURCE_2:
+
+;TEXT_HILIGHT_TL:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111100
+	.byte %11111000
+
+;TEXT_HILIGHT_T:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11110000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+
+;TEXT_HILIGHT_TR:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %01111111
+	.byte %00111111
+	.byte %00011111
+
+;TEXT_HILIGHT_L:
+	.byte %11111000
+	.byte %11110000
+	.byte %11110000
+	.byte %11110000
+	.byte %11110000
+	.byte %11110000
+	.byte %11111000
+	.byte %11111000
+
+;TEXT_HILIGHT_R:
+	.byte %00001111
+	.byte %00001111
+	.byte %00001111
+	.byte %00001111
+	.byte %00011111
+	.byte %00011111
+	.byte %00011111
+	.byte %00011111
+
+;TEXT_HILIGHT_BL:
+	.byte %11111100
+	.byte %11111110
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+
+;TEXT_HILIGHT_B:
+	.byte %00000000
+	.byte %00000000
+	.byte %00001111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+;TEXT_HILIGHT_BR:
+	.byte %00111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+;TEXT_ROTOR_CLOCKWISE_L:
+	.byte %00011000
+	.byte %00100000
+	.byte %01000000
+	.byte %01000000
+	.byte %01111111
+	.byte %01111111
+	.byte %00111111
+	.byte %00011111
+
+;TEXT_ROTOR_CLOCKWISE_R:
+	.byte %11111000
+	.byte %11111100
+	.byte %11111110
+	.byte %11111110
+	.byte %00000010
+	.byte %00000010
+	.byte %00000100
+	.byte %00011000
+
+;TEXT_ROTOR_ANTICLOCKWISE_L:
+	.byte %00011111
+	.byte %00111111
+	.byte %01111111
+	.byte %01111111
+	.byte %01000000
+	.byte %01000000
+	.byte %00100000
+	.byte %00011000
+
+;TEXT_ROTOR_ANTICLOCKWISE_R:
+	.byte %00011000
+	.byte %00000100
+	.byte %00000010
+	.byte %00000010
+	.byte %11111110
+	.byte %11111110
+	.byte %11111100
+	.byte %11111000
+
+TEXT_EXTRA_CHAR_SOURCE_2_END:
+
+TEXT_EXTRA_CHAR_SOURCE_3:
+
+;TEXT_HILIGHT_TL:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111000
+	.byte %11110000
+	.byte %11100000
+	.byte %11100000
+
+;TEXT_HILIGHT_T:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11110000
+	.byte %01100000
+	.byte %00000000
+	.byte %00000000
+	.byte %00000000
+
+;TEXT_HILIGHT_TR:
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %01111111
+	.byte %01111111
+	.byte %00001111
+	.byte %00000111
+
+;TEXT_HILIGHT_L:
+	.byte %11110000
+	.byte %11111000
+	.byte %11110000
+	.byte %11100000
+	.byte %11000000
+	.byte %11000000
+	.byte %11000000
+	.byte %11100000
+
+;TEXT_HILIGHT_R:
+	.byte %00000011
+	.byte %00000011
+	.byte %00000011
+	.byte %00000111
+	.byte %00001111
+	.byte %00011111
+	.byte %00001111
+	.byte %00000111
+
+;TEXT_HILIGHT_BL:
+	.byte %11110000
+	.byte %11111110
+	.byte %11111110
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+;TEXT_HILIGHT_B:
+	.byte %00000000
+	.byte %00000000
+	.byte %00000110
+	.byte %00001111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+;TEXT_HILIGHT_BR:
+	.byte %00000111
+	.byte %00001111
+	.byte %00011111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+	.byte %11111111
+
+;TEXT_ROTOR_CLOCKWISE_L:
+	.byte %00011000
+	.byte %00110000
+	.byte %01111100
+	.byte %01111111
+	.byte %01111111
+	.byte %01111100
+	.byte %00110000
+	.byte %00011000
+
+;TEXT_ROTOR_CLOCKWISE_R:
+	.byte %00011000
+	.byte %00001100
+	.byte %00111110
+	.byte %11111110
+	.byte %11111110
+	.byte %00111110
+	.byte %00001100
+	.byte %00011000
+
+;TEXT_ROTOR_ANTICLOCKWISE_L:
+	.byte %00011000
+	.byte %00110000
+	.byte %01111100
+	.byte %01111111
+	.byte %01111111
+	.byte %01111100
+	.byte %00110000
+	.byte %00011000
+
+;TEXT_ROTOR_ANTICLOCKWISE_R:
+	.byte %00011000
+	.byte %00001100
+	.byte %00111110
+	.byte %11111110
+	.byte %11111110
+	.byte %00111110
+	.byte %00001100
+	.byte %00011000
+
+TEXT_EXTRA_CHAR_SOURCE_3_END:

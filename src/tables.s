@@ -1,0 +1,581 @@
+
+
+;Mult 0..7 by 6 result
+LUT_MUL_BY_6:
+	.byte 0,6,12,18,24,30,36
+
+LUT_DIV_MOD_6:
+	.byte (0 << 3) + 0, (0 << 3) + 1, (0 << 3) + 2
+	.byte (0 << 3) + 3, (0 << 3) + 4, (0 << 3) + 5
+	.byte (1 << 3) + 0, (1 << 3) + 1, (1 << 3) + 2
+	.byte (1 << 3) + 3, (1 << 3) + 4, (1 << 3) + 5
+	.byte (2 << 3) + 0, (2 << 3) + 1, (2 << 3) + 2
+	.byte (2 << 3) + 3, (2 << 3) + 4, (2 << 3) + 5
+	.byte (3 << 3) + 0, (3 << 3) + 1, (3 << 3) + 2
+	.byte (3 << 3) + 3, (3 << 3) + 4, (3 << 3) + 5
+	.byte (4 << 3) + 0, (4 << 3) + 1, (4 << 3) + 2
+	.byte (4 << 3) + 3, (4 << 3) + 4, (4 << 3) + 5
+
+LUT_DIV_MOD_5:
+;	.byte (0 << 3) + 0, (0 << 3) + 1, (0 << 3) + 2
+;	.byte (0 << 3) + 3, (0 << 3) + 4
+;	.byte (1 << 3) + 0, (1 << 3) + 1, (1 << 3) + 2
+;	.byte (1 << 3) + 3, (1 << 3) + 4
+;	.byte (2 << 3) + 0, (2 << 3) + 1, (2 << 3) + 2
+;	.byte (2 << 3) + 3, (2 << 3) + 4
+;	.byte (3 << 3) + 0, (3 << 3) + 1, (3 << 3) + 2
+;	.byte (3 << 3) + 3, (3 << 3) + 4
+;	.byte (4 << 3) + 0, (4 << 3) + 1, (4 << 3) + 2
+;	.byte (4 << 3) + 3, (4 << 3) + 4
+;	.byte (5 << 3) + 0, (5 << 3) + 1, (5 << 3) + 2
+;	.byte (5 << 3) + 3, (5 << 3) + 4
+;	.byte (6 << 3) + 0
+	.byte 0, 0, 0, 0, 0
+	.byte 1, 1, 1, 1, 1
+	.byte 2, 2, 2, 2, 2
+	.byte 3, 3, 3, 3, 3
+	.byte 4, 4, 4, 4, 4
+	.byte 5, 5, 5, 5, 5
+	.byte 6
+
+
+LUT_DIV_BY_5:
+	.byte 0, 0, 0, 0, 0
+
+LUT_LIFE_Y:
+LUT_KEYS_Y:
+	.byte 0
+	.byte (SCREEN_HEIGHT * 8) - HUD_SYMBOL_HEIGHT
+	.byte HUD_SYMBOL_HEIGHT + 2
+	.byte (SCREEN_HEIGHT * 8) - ((2 * HUD_SYMBOL_HEIGHT) + 2)
+
+LUT_DEAD_Y:
+	.byte 0 + HUD_DEAD_SYMBOL_OFFSET
+	.byte (SCREEN_HEIGHT * 8) - HUD_SYMBOL_HEIGHT + HUD_DEAD_SYMBOL_OFFSET
+	.byte HUD_SYMBOL_HEIGHT + 2 + HUD_DEAD_SYMBOL_OFFSET
+	.byte (SCREEN_HEIGHT * 8) - ((2 * HUD_SYMBOL_HEIGHT) + 2) + HUD_DEAD_SYMBOL_OFFSET
+
+
+LUT_CHARBLOCKS:
+
+.macro	charBlock address, numchars, targetchar, filter
+	.word address
+	.byte numchars, targetchar, filter
+.endmacro
+
+	charBlock CHARBLOCK_1_0, CHARBLOCK_1_NUMCHARS, CHARBLOCK_1_TARGETCHAR, %11111111
+	charBlock CHARBLOCK_2_0, CHARBLOCK_2_NUMCHARS, CHARBLOCK_2_TARGETCHAR, %11110000
+	charBlock CHARBLOCK_2_1, CHARBLOCK_2_NUMCHARS, CHARBLOCK_2_TARGETCHAR, %00001111
+
+	charBlock CHARBLOCK_ROTOR_0, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_CLOCKWISE, %11000000
+	charBlock CHARBLOCK_ROTOR_1, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_CLOCKWISE, %00110000
+	charBlock CHARBLOCK_ROTOR_2, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_CLOCKWISE, %00001100
+	charBlock CHARBLOCK_ROTOR_3, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_CLOCKWISE, %00000011
+	charBlock CHARBLOCK_ROTOR_0, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_ANTICLOCKWISE, %00001100
+	charBlock CHARBLOCK_ROTOR_1, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_ANTICLOCKWISE, %00110000
+	charBlock CHARBLOCK_ROTOR_2, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_ANTICLOCKWISE, %11000000
+	charBlock CHARBLOCK_ROTOR_3, CHARBLOCK_ROTOR_NUMCHARS, CHARBLOCK_ROTOR_TARGETCHAR_ANTICLOCKWISE, %00000011
+	charBlock CHARBLOCK_4_0, CHARBLOCK_4_NUMCHARS, CHARBLOCK_4_TARGETCHAR, %11000000
+	charBlock CHARBLOCK_4_3, CHARBLOCK_4_NUMCHARS, CHARBLOCK_4_TARGETCHAR, %00110000
+	charBlock CHARBLOCK_4_2, CHARBLOCK_4_NUMCHARS, CHARBLOCK_4_TARGETCHAR, %00001100
+	charBlock CHARBLOCK_4_1, CHARBLOCK_4_NUMCHARS, CHARBLOCK_4_TARGETCHAR, %00000011
+	charBlock CHARBLOCK_8_0, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %10000000
+	charBlock CHARBLOCK_8_1, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %01000000
+	charBlock CHARBLOCK_8_2, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %00100000
+	charBlock CHARBLOCK_8_3, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %00010000
+	charBlock CHARBLOCK_8_4, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %00001000
+	charBlock CHARBLOCK_8_5, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %00000100
+	charBlock CHARBLOCK_8_6, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %00000010
+	charBlock CHARBLOCK_8_7, CHARBLOCK_8_NUMCHARS, CHARBLOCK_8_TARGETCHAR, %00000001
+	.byte $0, $0
+
+LUT_BIT:
+	.byte %00000001, %00000010, %00000100, %00001000, %00010000, %00100000, %01000000, %10000000
+LUT_MASK:
+	.byte %11111110, %11111101, %11111011, %11110111, %11101111, %11011111, %10111111, %01111111
+
+LUT_SPRITE_MASK:
+	.byte %11100000, %11111100
+
+LUT_BADDY_BITS:
+	.byte %00000111, 0, 0, %00111000
+
+LUT_WALL_PROBES:
+	;Right
+	.byte (SCREEN_WIDTH * 3) + TILE_WIDTH + 1
+	;Down
+	.byte (SCREEN_WIDTH * 4) + 2
+	;Left
+	.byte (SCREEN_WIDTH * 2)
+	;Up
+	.byte 2
+
+LUT_BARRIER_SWITCH = LUT_BARRIER_SWITCH_BASE - 1
+LUT_BARRIER_SWITCH_BASE:
+	.byte 1
+	.byte 2
+	.byte 3
+	.byte 1
+
+;This overlaps with the table that follows
+LUT_PLAYER_Z_OFFSETS_HORIZONTAL:
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 3
+	.byte 3
+	.byte 3
+	.byte 2
+	.byte 2
+	.byte 1
+	.byte 0
+
+LUT_PLAYER_Z_OFFSETS_STARTING:
+	.byte 0
+	.byte 1
+	.byte 2
+	.byte 2
+	.byte 3
+	.byte 3
+	.byte 3
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 3
+	.byte 3
+	.byte 3
+	.byte 2
+	.byte 2
+	.byte 1
+	.byte 0
+
+LUT_PLAYER_Z_OFFSETS_VERTICAL:
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 3
+	.byte 3
+	.byte 2
+	.byte 1
+	.byte 0
+
+	.byte 0
+	.byte 1
+	.byte 2
+	.byte 3
+	.byte 4
+	.byte 4
+	.byte 4
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+	.byte 5
+
+.macro interruptAt screen_line, interrupt_address
+	.byte screen_line + SPRITE_Y_OFFSET
+.assert .HIBYTE(entitySpriteInterrupt) = .HIBYTE(interrupt), error, "Need words in interrupt table"
+	;.word interrupt_address
+	.byte .LOBYTE(interrupt_address)
+.endmacro
+
+BUMP_GRAPHICS_OFFSET = 11
+BUMP_GRAPHICS_OFFSET2 = 0
+SPRITE_OFFSET = 5
+
+ZP_LUT_INTERRUPT_ROUTINES = 256 - ( LUT_INTERRUPT_ROUTINES_END - LUT_INTERRUPT_ROUTINES )
+
+;LUT_INTERRUPT_ROUTINES:
+;	interruptAt -10, reenableSpritesInterrupt
+;	interruptAt (0 * 21) + BUMP_GRAPHICS_OFFSET2, entitySpriteInterrupt
+;	interruptAt (0 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (0 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutineAndColour0
+;	interruptAt (0 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (1 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2AndColour1
+;	interruptAt (1 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (1 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutine
+;	interruptAt (1 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (2 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2
+;	interruptAt (2 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (2 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutine
+;	interruptAt (2 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (3 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2
+;	interruptAt (3 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (3 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutine
+;	interruptAt (3 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (4 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2
+;	interruptAt (4 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (4 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutine
+;	interruptAt (4 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (5 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2
+;	interruptAt (5 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (5 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutine
+;	interruptAt (5 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (6 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2
+;	interruptAt (6 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (6 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutine
+;	interruptAt (6 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (7 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2
+;	interruptAt (7 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (7 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutine
+;	interruptAt (7 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (8 * 21) + BUMP_GRAPHICS_OFFSET2, hudBumpGraphicsRoutine2
+;	interruptAt (8 * 21) + BUMP_GRAPHICS_OFFSET2 + SPRITE_OFFSET, setMemoryPointersBottom
+;	interruptAt (8 * 21) + BUMP_GRAPHICS_OFFSET, hudBumpGraphicsRoutineAndColour2
+;	interruptAt (8 * 21) + BUMP_GRAPHICS_OFFSET + SPRITE_OFFSET, entitySpriteInterrupt
+;	interruptAt (9 * 21) + BUMP_GRAPHICS_OFFSET2, hudChangeColourRoutine3
+;BOTTOM_OF_SCREEN_RASTER:
+;	interruptAt (25 * 8), interrupt
+;LUT_INTERRUPT_ROUTINES_END:
+
+LUT_CHAR_ADDRESS_HI_BYTES:
+	.byte .hibyte(VIC_BASE + (0 * $800))
+	.byte .hibyte(VIC_BASE + (1 * $800))
+	.byte .hibyte(VIC_BASE + (2 * $800))
+	.byte .hibyte(VIC_BASE + (3 * $800))
+	.byte .hibyte(VIC_BASE + (4 * $800))
+	.byte .hibyte(VIC_BASE + (5 * $800))
+	.byte .hibyte(VIC_BASE + (6 * $800))
+	.byte .hibyte(VIC_BASE + (7 * $800))
+
+LUT_FRAME_BOUNCE:
+	;Up, Left, Down, Right
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_MED_D,   FRAME_PLAYER_ROUND_L, FRAME_PLAYER_MED_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_MED_D,   FRAME_PLAYER_MED_L,   FRAME_PLAYER_MED_U
+	.byte FRAME_PLAYER_MED_R  , FRAME_PLAYER_ROUND_D, FRAME_PLAYER_MED_L,   FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_MED_R  , FRAME_PLAYER_ROUND_D, FRAME_PLAYER_MED_L,   FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_MED_R  , FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, FRAME_PLAYER_ROUND_D, FRAME_PLAYER_ROUND_L, FRAME_PLAYER_ROUND_U
+	.byte FRAME_PLAYER_ROUND_R, 0,                  FRAME_PLAYER_ROUND_L, 0
+	.byte FRAME_PLAYER_ROUND_R, 0,                  FRAME_PLAYER_ROUND_L, 0
+	.byte FRAME_PLAYER_ROUND_R, 0,                  FRAME_PLAYER_ROUND_L, 0
+	.byte FRAME_PLAYER_ROUND_R, 0,                  FRAME_PLAYER_ROUND_L, 0
+
+LUT_FINISH_ROTATION_INDEX:
+	.byte 0, 1, 2, 4, 3, 5
+
+LUT_FRAME_STARTING_BOUNCE:
+	;Up, Left, Down, Right
+	.byte FRAME_START_MED_R  
+	.byte FRAME_START_MED_R  
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_ROUND_R
+	.byte FRAME_START_MED_R  
+
+LUT_FRAME_STARTING_BOUNCE_D:
+	.byte FRAME_START_MED_D
+	.byte FRAME_START_MED_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_ROUND_D
+	.byte FRAME_START_MED_D
+
+	.byte FRAME_START_MED_L
+	.byte FRAME_START_MED_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_ROUND_L
+	.byte FRAME_START_MED_L
+
+	.byte FRAME_START_MED_U 
+	.byte FRAME_START_MED_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U    
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_ROUND_U 
+	.byte FRAME_START_MED_U
+
+	.byte FRAME_START_MED_UL 
+	.byte FRAME_START_MED_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL    
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_ROUND_UL 
+	.byte FRAME_START_MED_UL
+
+	.byte FRAME_START_MED_UR 
+	.byte FRAME_START_MED_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR    
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_ROUND_UR 
+	.byte FRAME_START_MED_UR
+
+.macro speedRow right, down
+	.byte right, down
+.endmacro
+
+LUT_SPEEDS_PXL:
+	;horiz pxl, vert pxl
+	;horiz subpxl, vert subpxl
+	;PAL PLAYER SLOW (5/4, 1)
+	speedRow %00000001, %00000001
+	speedRow %01000000, %00000000
+	;PAL BADDY SLOW (5/12, 1/3)
+	speedRow %00000000, %00000000
+	speedRow %01101010, %01010101
+	;PAL PLAYER MEDIUM ( = VIC20 SLOW) (5/3, 4/3)
+	speedRow %00000001, %00000001
+	speedRow %10101010, %01010101
+	;PAL BADDY MEDIUM (5/9, 4/9)
+	speedRow %00000000, %00000000
+	speedRow %10000111, %01110010
+	;PAL PLAYER FAST ( = VIC20 FAST) (2, 8/5)
+	speedRow %00000010, %00000001
+	speedRow %00000000, %10011001
+	;PAL BADDY FAST (2/3, 8/15)
+	speedRow %00000000, %00000000
+	speedRow %10101010, %10001000
+
+SPEEDS_NTSC_OFFSET = LUT_SPEEDS_PXL_NTSC - LUT_SPEEDS_PXL
+LUT_SPEEDS_PXL_NTSC:
+	;right, down
+	;NTSC PLAYER SLOW (25/24, 5/6)
+	speedRow %00000001, %00000000
+	speedRow %00001010, %11010101
+	;NTSC BADDY SLOW (25/72, 5/18)
+	speedRow %00000000, %00000000
+	speedRow %01011001, %01000111
+	;NTSC PLAYER MEDIUM (25/18, 20/18)
+	speedRow %00000001, %00000001
+	speedRow %01100011, %00011100
+	;NTSC BADDY MEDIUM (25/54, 20/54)
+	speedRow %00000000, %00000000
+	speedRow %01110110, %01011111
+	;NTSC PLAYER FAST (10/6, 4/3)
+	speedRow %00000001, %00000001
+	speedRow %10101010, %01010101
+	;NTSC BADDY FAST (10/18, 4/9)
+	speedRow %00000000, %00000000
+	speedRow %10001110, %01110010
+
+LUT_COLOURS:
+	.byte VIC_II_COLOUR_GREEN
+	.byte VIC_II_COLOUR_LIGHT_GREEN
+	.byte VIC_II_COLOUR_RED
+	.byte VIC_II_COLOUR_PINK
+	.byte VIC_II_COLOUR_DARK_GREY
+	.byte VIC_II_COLOUR_WHITE
+	.byte VIC_II_COLOUR_GREY
+	.byte WALL_TOP_COLOUR
+	.byte WALL_EDGE_COLOUR
+LUT_COLOURS_END:
+	
+LUT_ALT_COLOURS:
+	.byte VIC_II_COLOUR_LIGHT_BLUE
+	.byte VIC_II_COLOUR_CYAN
+	.byte VIC_II_COLOUR_RED
+	.byte VIC_II_COLOUR_PINK
+	.byte VIC_II_COLOUR_DARK_GREY
+	.byte VIC_II_COLOUR_WHITE
+	.byte VIC_II_COLOUR_GREY
+	.byte ALT_WALL_TOP_COLOUR
+	.byte ALT_WALL_EDGE_COLOUR
+LUT_ALT_COLOURS_END:
+
+LUT_ELECTRIFICATION_COLOURS:
+	.byte COLOURS_DO, COLOURS_DONT
+	.byte COLOURS_DO, COLOURS_DONT
+	.byte COLOURS_DO, COLOURS_DONT
+	.byte COLOURS_DO_BRIGHT, COLOURS_DONT_BRIGHT
+	.byte COLOURS_DO_BRIGHT, COLOURS_DONT_BRIGHT
+	.byte COLOURS_PLAYER_DARK, COLOURS_PLAYER_DARK
+	.byte COLOURS_PLAYER_WHITE, COLOURS_PLAYER_WHITE
+	.byte COLOURS_PLAYER_GREY, COLOURS_PLAYER_GREY
+	
+LUT_ELECTRIFICATION_FACE:
+	.byte SPRITE_FACE_ELECTRIFIED_R + ((SPRITE_ADDRESS_0 - VIC_BASE) / 64)
+	.byte SPRITE_FACE_ELECTRIFIED_D + ((SPRITE_ADDRESS_0 - VIC_BASE) / 64)
+	.byte SPRITE_FACE_ELECTRIFIED_L + ((SPRITE_ADDRESS_0 - VIC_BASE) / 64)
+	.byte 0
+
+LUT_TEXT_MEMORY_POINTERS:
+	.byte (TEXT_SCREEN_MEMORY << 4) | (4 << 1)
+	.byte (TEXT_SCREEN_MEMORY << 4) | (5 << 1)
+	.byte (TEXT_SCREEN_MEMORY << 4) | (6 << 1)
+	.byte (TEXT_SCREEN_MEMORY << 4) | (7 << 1)
+	.byte (TEXT_SCREEN_MEMORY << 4) | (7 << 1)
+	.byte (TEXT_SCREEN_MEMORY << 4) | (6 << 1)
+	.byte (TEXT_SCREEN_MEMORY << 4) | (5 << 1)
+	.byte (TEXT_SCREEN_MEMORY << 4) | (4 << 1)
+
+LUT_WOBBLE_FROM_FRAME:
+	.byte 0, 1, 1, 0, 1, 0, 0, 1
+
+LUT_DOOR_ADJUST:
+	.byte TILE_HORIZ_INCREMENT, (SCREEN_WIDTH * TILE_VERT_INCREMENT)
+
+REGION_VARS:
+
+VAR_ANIMATION_ADVANCE:					.byte %01010101 ; (1/3)
+TIMEBAR_SUBPXLS_PER_FRAME:				.byte %00001001
+FINISHING_TOTAL_FRAME_COUNT:			.byte 60 * 3
+EXPLODING_TRANSITION_FRAME_COUNT:		.byte 5
+DYING_TOTAL_FRAME_COUNT:				.byte 60 * 3
+GAME_OVER_FRAME_COUNT:					.byte 60 * 3
+CONGRATULATIONS_FRAME_COUNT:			.byte 60 * 2
+CHEAT_FRAME_COUNT:						.byte 60 * 3
+.if TESTING
+GOOD_LUCK_FRAME_COUNT:					.byte 1
+.else
+GOOD_LUCK_FRAME_COUNT:					.byte 60 * 1
+.endif
+
+
+REGION_VARS_END:
+
+NTSC_VARS:
+
+VAR_ANIMATION_ADVANCE_NTSC:				.byte %01000111 ; (5/18)
+TIMEBAR_SUBPXLS_PER_FRAME_NTSC:			.byte %00001000 ;3/2 * 1/60 * 146/118 
+FINISHING_TOTAL_FRAME_COUNT_NTSC:		.byte (60 * 3 * 6) / 5
+EXPLODING_TRANSITION_FRAME_COUNT_NTSC:	.byte (5 * 6) / 5
+DYING_TOTAL_FRAME_COUNT_NTSC:			.byte (60 * 3 * 6) / 5
+GAME_OVER_FRAME_COUNT_NTSC:				.byte (60 * 3 * 6) / 5
+CONGRATULATIONS_FRAME_COUNT_NTSC:		.byte (60 * 2 * 6) / 5
+CHEAT_FRAME_COUNT_NTSC:					.byte (60 * 3 * 6) / 5
+.if TESTING
+GOOD_LUCK_FRAME_COUNT_NTSC:				.byte 1
+.else
+GOOD_LUCK_FRAME_COUNT_NTSC:				.byte (60 * 1 * 6) / 5
+.endif
+
+

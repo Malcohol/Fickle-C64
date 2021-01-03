@@ -1,0 +1,10 @@
+*.o 
+*.bin 
+main.labels 
+fickle.crt 
+viclog
+fickle.labels
+*.exo 
+interruptTables.s
+lineTable.s
+!music.bin
