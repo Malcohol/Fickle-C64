@@ -5,7 +5,8 @@ LD65 = ld65
 PYTHON = python3
 # Part of the Vice emulator project.
 CARTCONV = cartconv
-# This is part of the GoatTracker2 project.
+# This is part of the GoatTracker2 project. On my machine, this was in /usr/lib/goattracker, so it 
+# didn't get added to the PATH automatically when goattracker was installed.
 INS2SND2 = ins2snd2
 # This is slightly customized, so I put it in a submodule.
 EXOMIZER = ../exomizer/exomizer2/src/exomizer
