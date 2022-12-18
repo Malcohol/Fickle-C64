@@ -1,3 +1,14 @@
+from sys import stdout
+from argparse import ArgumentParser, FileType
+
+parser = ArgumentParser()
+parser.add_argument("-o", "--output", action="store")
+parsedArgs = parser.parse_args()
+
+output = stdout
+if parsedArgs.output:
+    output = open(parsedArgs.output, "w")
+
 # The bottom sprite only needs 10 pixels, so splitting at 11
 # means we don't need an extra sprite and extra interrupts.
 splitAt = 11
@@ -14,10 +25,10 @@ def calcLine(x):
 	return d + m
 
 
-print "LUT_LINE_TABLE_HI:"
+output.write("LUT_LINE_TABLE_HI:\n")
 for i in range(0, maxLine + 1):
-	print "\t.byte .hibyte(HUD_RIGHT_ADDRESS + ", calcLine(i), ")"
+	output.write("\t.byte .hibyte(HUD_RIGHT_ADDRESS + {})\n".format(calcLine(i)))
 
-print "LUT_LINE_TABLE_LO:"
+output.write("LUT_LINE_TABLE_LO:\n")
 for i in range(0, maxLine + 1):
-	print "\t.byte .lobyte(HUD_RIGHT_ADDRESS + ", calcLine(i), ")"
+	output.write("\t.byte .lobyte(HUD_RIGHT_ADDRESS + {})\n".format(calcLine(i)))

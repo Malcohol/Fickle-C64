@@ -2,7 +2,7 @@ all: fickle.crt
 
 CA65 = ca65
 LD65 = ld65
-PYTHON = python
+PYTHON = python3
 # Part of the Vice emulator project.
 CARTCONV = cartconv
 # This is part of the GoatTracker2 project.
@@ -26,10 +26,10 @@ main.o:	$(SOURCE_FILES) $(GEN_SOURCE_FILES) $(SOUND_EFFECTS) ../Music/music.bin
 	$(CA65) --cpu 6502X -g $<
 
 lineTable.s: buildLineTable.py
-	$(PYTHON) buildLineTable.py > lineTable.s
+	$(PYTHON) buildLineTable.py -o lineTable.s
 
 interruptTables.s: buildInterruptTables.py
-	$(PYTHON) buildInterruptTables.py > interruptTables.s
+	$(PYTHON) buildInterruptTables.py -o interruptTables.s
 
 sfx_%.bin: ../Music/sfx_%.ins
 	$(INS2SND2) $< $@ -b
