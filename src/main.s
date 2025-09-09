@@ -244,7 +244,7 @@ initialization:
 		CLI
 
 		;Initialization over. Everything else done using interrupt handlers.
-		;This must have no interresting code in it, because the interrupts do
+		;This must have no interesting code in it, because the interrupts do
 		;not restore registers.
 	@stop:
 		JMP @stop
